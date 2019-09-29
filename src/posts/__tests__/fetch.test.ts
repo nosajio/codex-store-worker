@@ -1,0 +1,27 @@
+import { fetchPostsFromGitHub, PostFile } from '../fetch'
+
+const githubURI = 'https://api.github.com/repos/nosajio/writing/contents'
+
+describe('fetch', () => {
+  let posts: PostFile[]
+  beforeAll(async () => {
+    posts = await fetchPostsFromGitHub(githubURI)
+  })
+
+  test('returns a array of PostFile objects', async () => {
+    const keys = Object.keys(posts[0])
+    expect(keys).toEqual(
+      expect.arrayContaining(['body', 'contentURI', 'filename']),
+    )
+  })
+
+  test('returned posts have content', () => {
+    expect(posts.every(p => Boolean(p.body) && p.body.length > 0)).toBeTruthy()
+  })
+
+  test('returned posts have filenames', () => {
+    expect(
+      posts.every(p => Boolean(p.filename) && p.filename.length > 0),
+    ).toBeTruthy()
+  })
+})

@@ -1,27 +1,43 @@
-import { fetchPostsFromGitHub, PostFile } from '../fetch'
+import { fetchPostsFromGitHub, PostFile } from '../fetch';
 
-const githubURI = 'https://api.github.com/repos/nosajio/writing/contents'
+const githubURI = 'https://api.github.com/repos/nosajio/writing/contents';
 
 describe('fetch', () => {
-  let posts: PostFile[]
+  let posts: PostFile[];
   beforeAll(async () => {
-    posts = await fetchPostsFromGitHub(githubURI)
-  })
+    posts = await fetchPostsFromGitHub(githubURI);
+  });
 
-  test('returns a array of PostFile objects', async () => {
-    const keys = Object.keys(posts[0])
+  test('returns a array of PostFile objects', () => {
+    const keys = Object.keys(posts[0]);
     expect(keys).toEqual(
-      expect.arrayContaining(['body', 'contentURI', 'filename']),
-    )
-  })
+      expect.arrayContaining([
+        'body',
+        'contentURI',
+        'filename',
+        'date',
+        'slug',
+      ]),
+    );
+  });
 
   test('returned posts have content', () => {
-    expect(posts.every(p => Boolean(p.body) && p.body.length > 0)).toBeTruthy()
-  })
+    expect(posts.every(p => Boolean(p.body) && p.body.length > 0)).toBeTruthy();
+  });
 
   test('returned posts have filenames', () => {
     expect(
       posts.every(p => Boolean(p.filename) && p.filename.length > 0),
-    ).toBeTruthy()
-  })
-})
+    ).toBeTruthy();
+  });
+
+  test('returned posts should contain dates', () => {
+    expect(posts.every(p => Boolean(p.date) && p.date instanceof Date));
+  });
+
+  test('should sort posts descending by date', () => {
+    expect(
+      posts.every((p, i) => (i === 0 ? true : p.date < posts[i - 1].date)),
+    ).toBeTruthy();
+  });
+});

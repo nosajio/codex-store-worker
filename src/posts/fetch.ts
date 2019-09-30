@@ -28,7 +28,8 @@ export async function fetchPostsFromGitHub(
       })),
     ),
   );
-  return postContents;
+  const sortedPosts = sortPosts(postContents);
+  return sortedPosts;
 }
 
 export async function getPostContentFromGitHub(
@@ -41,7 +42,7 @@ export async function getPostContentFromGitHub(
 }
 
 function base64Decode(str: string): string {
-  const buf = new Buffer(str, 'base64');
+  const buf = Buffer.from(str, 'base64');
   const text = buf.toString('ascii');
   return text;
 }
@@ -81,4 +82,8 @@ function isFilenamePost(filename: string): boolean {
     throw new TypeError('Filename is required');
   }
   return FILENAME_PTN.test(filename);
+}
+
+function sortPosts(posts: PostFile[]): PostFile[] {
+  return posts.sort((a, b) => b.date.getTime() - a.date.getTime());
 }

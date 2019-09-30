@@ -1,11 +1,11 @@
-import { fetchPostsFromGitHub, PostFile } from '../fetch';
+import { githubPosts, PostFile } from '../main';
 
 const githubURI = 'https://api.github.com/repos/nosajio/writing/contents';
 
 describe('fetch', () => {
   let posts: PostFile[];
   beforeAll(async () => {
-    posts = await fetchPostsFromGitHub(githubURI);
+    posts = await githubPosts(githubURI);
   });
 
   test('returns a array of PostFile objects', () => {

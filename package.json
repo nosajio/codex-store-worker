@@ -3,7 +3,7 @@
   "name": "posts-proxy-worker",
   "version": "1.0.0",
   "description": "A template for kick starting a Cloudflare Workers project",
-  "main": "index.js",
+  "main": "src/main.ts",
   "scripts": {
     "build": "webpack",
     "dev": "NODE_ENV=development npm run build",

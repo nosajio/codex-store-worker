@@ -2,7 +2,7 @@ import { githubPosts, PostFile } from '../main';
 
 const githubURI = 'https://api.github.com/repos/nosajio/writing/contents';
 
-describe('fetch', () => {
+describe('githubPosts', () => {
   let posts: PostFile[];
   beforeAll(async () => {
     posts = await githubPosts(githubURI);

@@ -4,6 +4,7 @@ const githubRepoURI = 'https://api.github.com/repos/nosajio/writing/contents';
 
 export async function handleRequest(request: Request): Promise<Response> {
   try {
+    console.log('Fetching posts from github [%s]...', githubRepoURI);
     const posts = await githubPosts(githubRepoURI);
     const response = new Response(
       `${posts.length} posts successfully processed and stored`,

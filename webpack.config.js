@@ -1,9 +1,10 @@
-const path = require('path')
-const webpack = require('webpack')
+const path = require('path');
+const webpack = require('webpack');
 
-const mode = process.env.NODE_ENV || 'production'
+const mode = process.env.NODE_ENV || 'production';
 
 module.exports = {
+  entry: path.join(__dirname, 'src', 'main.ts'),
   output: {
     filename: `worker.${mode}.js`,
     path: path.join(__dirname, 'dist'),
@@ -26,4 +27,4 @@ module.exports = {
       { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' },
     ],
   },
-}
+};

@@ -13,9 +13,7 @@
   },
   "author": "Jason Howmans <jason@nosaj.io>",
   "license": "MIT",
-  "dependencies": {
-    "axios": "^0.19.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^10.14.17",
     "@cloudflare/workers-types": "^1.0.6",

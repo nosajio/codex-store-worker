@@ -3,9 +3,12 @@ import { PostFile } from './main';
 export const FILENAME_PTN = /([a-z0-9-]*)-(\d{4}-\d{2}-\d{2})?.md/;
 
 export function base64Decode(str: string): string {
-  const buf = Buffer.from(str, 'base64');
-  const text = buf.toString('ascii');
-  return text;
+  // Use worker global scope method to decode base64
+  // https://developers.cloudflare.com/workers/reference/apis/standard/
+  return atob(str);
+  // const buf = Buffer.from(str, 'base64');
+  // const text = buf.toString('ascii');
+  // return text;
 }
 
 export function isFilenamePost(filename: string): boolean {

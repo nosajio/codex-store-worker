@@ -1,7 +1,7 @@
 import { KVNamespace } from '@cloudflare/workers-types'
 
 declare global {
-  const myKVNamespace: KVNamespace
+  const codex_store: KVNamespace
   type GitHubContentResponse = {
     ad_url: string
     git_url: string
